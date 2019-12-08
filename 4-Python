@@ -1,0 +1,45 @@
+import math
+from matplotlib import pyplot as plt
+
+
+yo = float(input("Enter the initial height (in meters): "))
+vo = float(input("Enter the magnitude of the velocity: "))
+angle = float(input("Enter the angle (in degrees): "))
+ax = float(input("Enter the acceleration for x-component: "))
+ay = float(input("Enter the acceleration for y-component: "))
+    
+if ay==0:
+    print("Error")
+
+x_vals = [] 
+y_vals = [] 
+vox = vo*math.cos(angle*(3.141/180)) 
+voy = vo*math.sin(angle*(3.141/180)) 
+    
+t = 0
+x = 0
+y = yo 
+c = 0.0001 
+    
+x_vals.append(x)
+y_vals.append(y)
+    
+while(True):
+    t = t+c
+    x = vox*t + (0.5)*ax*(t*t)
+    y = voy*t + (0.5)*ay*(t*t) + yo
+        
+    x_vals.append(x)
+    y_vals.append(y)
+        
+    if y < c:
+        break
+        
+plt.plot(x_vals,y_vals)  
+ax = plt.gca()
+ax.set_ylim([0,max(y_vals)])
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+plt.title('The Motion')
+plt.grid()
+plt.show()
